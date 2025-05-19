@@ -1,0 +1,13 @@
+# 容器内路径配置（绝对路径）
+root = "/app"
+tmp_dir = "/tmp"
+
+[build]
+cmd = "go build -o ./tmp/main ."
+bin = "tmp/main"
+delay = 1000  # 延长构建间隔（毫秒）
+
+# 禁用 TTY 相关功能
+[color]
+main = "none"
+log = "none"
