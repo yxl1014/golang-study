@@ -1,5 +1,4 @@
-FROM golang
-LABEL authors="manmanlai"
+FROM ubuntu:latest
+LABEL authors="Administrator"
 
 ENTRYPOINT ["top", "-b"]
-CMD ["air.exe", "-c", ""]
