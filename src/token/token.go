@@ -8,22 +8,25 @@ type Token struct {
 }
 
 const (
-	// 未知的
-	ILLEGAL = "ILLEGAL"
-	// 终止符
-	EOF = "EOF"
+	ILLEGAL = "ILLEGAL" // 未知的
+	EOF     = "EOF"     // 终止符
 
 	/// 标识符 + 字面量
-	// 变量
-	IDENT = "IDENT"
-	// 整形
-	INT = "INT"
+
+	IDENT = "IDENT" // 变量
+	INT   = "INT"   // 整形
 
 	/// 运算符
-	// 复制
-	ASSIGN = "="
-	// 加
-	PLUS = "+"
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
+	LT       = "<"
+	GT       = ">"
+	EQ       = "=="
+	NOT_EQ   = "!="
 
 	/// 分隔符
 	COMMA     = ","
@@ -34,8 +37,30 @@ const (
 	RBRACE    = "}"
 
 	/// 关键字
-	// 方法
-	FUNCTION = "FUNCTION"
-	// 定义
-	LET = "LET"
+	FUNCTION = "FUNCTION" // 方法
+	LET      = "LET"      // 定义
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
+
+// 字符串 对应关键字map
+var keywords = map[string]TokenType{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
+}
+
+// 判断字符串是什么关键字，如果不是那就解释为变量名
+func LookupIdent(ident string) TokenType {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
+}
