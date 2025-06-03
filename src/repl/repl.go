@@ -1,18 +1,19 @@
 package repl
 
+// repl/repl.go
+
 import (
 	"bufio"
 	"fmt"
 	"goland-study/src/lexer"
-	"goland-study/src/token"
+	"goland-study/src/parser"
 	"io"
 )
-
-// Read-Eval-Print-Loop (读取值打印循环)
 
 const PROMPT = ">> "
 
 func Start(in io.Reader, out io.Writer) {
+	_, _ = fmt.Fprintf(out, MONKEY_FACE)
 	scanner := bufio.NewScanner(in)
 	for {
 		_, _ = fmt.Fprintf(out, PROMPT)
@@ -20,10 +21,39 @@ func Start(in io.Reader, out io.Writer) {
 		if !scanned {
 			return
 		}
+
 		line := scanner.Text()
 		l := lexer.New(line)
-		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
-			_, _ = fmt.Fprintf(out, "%+v\n", tok)
+		p := parser.New(l)
+
+		program := p.ParseProgram()
+		if len(p.Errors()) != 0 {
+			printParserErrors(out, p.Errors())
+			continue
 		}
+
+		io.WriteString(out, program.String())
+		io.WriteString(out, "\n")
+	}
+}
+
+const MONKEY_FACE = `            __,__
+   .--.  .-"     "-.  .--.
+  / .. \/  .-. .-.  \/ .. \
+ | |  '|  /   Y   \  |'  | |
+ | \   \  \ 0 | 0 /  /   / |
+  \ '- ,\.-"""""""-./, -' /
+   ''-' /_   ^ ^   _\ '-''
+       |  \._   _./  |
+       \   \ '~' /   /
+        '._ '-=-' _.'
+           '-----'
+`
+
+func printParserErrors(out io.Writer, errors []string) {
+	io.WriteString(out, "Woops! We ran into some monkey business here!\n")
+	io.WriteString(out, " parser errors:\n")
+	for _, msg := range errors {
+		io.WriteString(out, "\t"+msg+"\n")
 	}
 }
