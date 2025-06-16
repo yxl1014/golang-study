@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"goland-study/src/go-c-gc/c"
 	"testing"
 	"unsafe"
 )
@@ -38,7 +39,7 @@ func IntToBytes(n uint32) []byte {
 }
 
 func TestMemoryC(t *testing.T) {
-	data := Malloc(4)
+	data := c.Malloc(4)
 	fmt.Printf(" data % +v, %T\n", data, data)
 
 	myData := (*uint32)(data)
@@ -46,7 +47,7 @@ func TestMemoryC(t *testing.T) {
 	fmt.Printf(" data % +v, %T\n", *myData, *myData)
 
 	var a uint32 = 100
-	MemCopy(data, IntToBytes(a), 4)
+	c.MemCopy(data, IntToBytes(a), 4)
 	fmt.Printf(" data % +v, %T\n", *myData, *myData)
-	Free(data)
+	c.Free(data)
 }
