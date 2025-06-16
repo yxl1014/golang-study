@@ -1,9 +1,9 @@
 package evaluator
 
 import (
-	"goland-study/src/lexer"
-	"goland-study/src/object"
-	"goland-study/src/parser"
+	"goland-study/src/monkey/lexer"
+	"goland-study/src/monkey/object"
+	"goland-study/src/monkey/parser"
 	"testing"
 )
 

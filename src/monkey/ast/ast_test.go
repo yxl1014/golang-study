@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"goland-study/src/token"
+	"goland-study/src/monkey/token"
 	"testing"
 )
 

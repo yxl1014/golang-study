@@ -2,7 +2,7 @@ package ast
 
 import (
 	"bytes"
-	"goland-study/src/token"
+	"goland-study/src/monkey/token"
 	"strings"
 )
 

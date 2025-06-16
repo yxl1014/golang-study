@@ -5,9 +5,9 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"goland-study/src/evaluator"
-	"goland-study/src/lexer"
-	"goland-study/src/parser"
+	"goland-study/src/monkey/evaluator"
+	"goland-study/src/monkey/lexer"
+	"goland-study/src/monkey/parser"
 	"io"
 )
 

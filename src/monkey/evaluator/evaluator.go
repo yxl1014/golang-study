@@ -1,8 +1,8 @@
 package evaluator
 
 import (
-	"goland-study/src/ast"
-	"goland-study/src/object"
+	"goland-study/src/monkey/ast"
+	"goland-study/src/monkey/object"
 )
 
 // 整个单例

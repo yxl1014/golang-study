@@ -4,8 +4,8 @@ package parser
 
 import (
 	"fmt"
-	"goland-study/src/ast"
-	"goland-study/src/lexer"
+	"goland-study/src/monkey/ast"
+	"goland-study/src/monkey/lexer"
 	"testing"
 )
 
