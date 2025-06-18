@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"goland-study/src/monkey/evaluator"
 	"goland-study/src/monkey/lexer"
+	"goland-study/src/monkey/object"
 	"goland-study/src/monkey/parser"
 	"io"
 )
@@ -16,6 +17,8 @@ const PROMPT = ">> "
 func Start(in io.Reader, out io.Writer) {
 	_, _ = fmt.Fprintf(out, MONKEY_FACE)
 	scanner := bufio.NewScanner(in)
+	env := object.NewEnvironment()
+
 	for {
 		_, _ = fmt.Fprintf(out, PROMPT)
 		scanned := scanner.Scan()
@@ -36,7 +39,7 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		evaluated := evaluator.Eval(program)
+		evaluated := evaluator.Eval(program, env)
 		if evaluated != nil {
 			io.WriteString(out, evaluated.Inspect())
 			io.WriteString(out, "\n")
